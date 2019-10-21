@@ -1,0 +1,13 @@
+Key = n                     //Positive integer value
+alphabetArray[]             //an array containing the alphabet, can also contain other characters in the UNICODE standard
+Text = input()              //Whatever string value is entered
+
+//Iterate over each and every single character in the string
+//The aim is to change the original string instead of creating a new one, for maximum efficiency
+for each character c in Text    
+{
+    c.index += Key  
+}
+
+//Return the final output
+return Text
