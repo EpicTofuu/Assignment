@@ -6,12 +6,12 @@ for n in Alphabet:
 # Finds the index of a given element in an array
 # XXX TODO, check if array.Find () is a thing and utilise if it is
 def FindInArray (array, element):
-    for i in array:
-        if (i == element):
+    for i in range (len (array)):
+        if (array[i] == element):
             return i
 
 # encrypts the given string "userIn", using the caesar cipher encryption algorithm
-# userIn: the string to be encrypted
+# userIn: the string to be encrypted.
 # key: the number of places to shift each character
 # returns: the encrypted string
 def Caesar_Encrypt (userIn, key):
@@ -27,7 +27,7 @@ def Caesar_Encrypt (userIn, key):
     # interate over each and every single character in the list
     for a in range (len (InList)):
         # find the index of the letter in the *input*
-        inIndex = FindInArray (AlphabetList, a)
+        inIndex = FindInArray (AlphabetList, InList[a])
 
         InList[a] = AlphabetList[inIndex + key]
 
@@ -39,4 +39,4 @@ def Caesar_Encrypt (userIn, key):
     print (value)
 
 # testing
-Caesar_Encrypt ("dong", 3)
+Caesar_Encrypt ("DONG", 3)
