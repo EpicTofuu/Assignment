@@ -25,18 +25,23 @@ def Caesar_Encrypt (userIn, key):
         InList.append (i)
 
     # interate over each and every single character in the list
-    for a in range (len (InList)):
+    for a in range (len (InList)):        
         # find the index of the letter in the *input*
         inIndex = FindInArray (AlphabetList, InList[a])
 
-        InList[a] = AlphabetList[inIndex + key]
+        # check if the character is supported
+        if (type (inIndex) != int):
+            raise Exception ("Character not supported")
+
+        InList[a] = AlphabetList[(inIndex + key) % len(AlphabetList)]
 
     # conver the list back into a string
     value = ""
     for i in InList:
         value += i
 
-    print (value)
+    return value
 
 # testing
-Caesar_Encrypt ("DONG", 3)
+text = input()
+print (Caesar_Encrypt (text, 3))
