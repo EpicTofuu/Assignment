@@ -4,9 +4,10 @@ Text = input()              //Whatever string value is entered
 
 //Iterate over each and every single character in the string
 //The aim is to change the original string instead of creating a new one, for maximum efficiency
-for each character c in Text    
+for each character "c" in Text
 {
-    c.index += Key  
+    //access the value of c and set it to whatever value is at c.index + key thus shifting the value of the character to the keyth place
+    c = Key[c.index + key]  
 }
 
 //Return the final output
