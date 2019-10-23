@@ -5,6 +5,11 @@ AlphabetList = []
 for n in Alphabet:
     AlphabetList.append (n)
 
+# adds two hexadecimal numbers and returns them both in hex
+def AddHex (a, b):
+    value = int (a) + int (b)
+    return hex (value)
+
 # Finds the index of a given element in an array
 # XXX TODO, check if array.Find () is a thing and utilise if it is
 def FindInArray (array, element):
@@ -50,6 +55,9 @@ def Caesar_Encrypt_Key (userIn, key):
 
     return value
 
+
+'''
 # testing
 text = input()
 print (Caesar_Encrypt (text))
+'''
