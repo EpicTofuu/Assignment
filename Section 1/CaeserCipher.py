@@ -1,3 +1,5 @@
+import random
+
 Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" # TODO implement unicode standard
 AlphabetList = []
 for n in Alphabet:
@@ -10,11 +12,17 @@ def FindInArray (array, element):
         if (array[i] == element):
             return i
 
+# encrypts the given string "userIn" using a randomly generated key
+# userIn: the string to be encrypted
+def Caesar_Encrypt (userIn):
+    k = random.randrange(0, 100)
+    return Caesar_Encrypt_Key (userIn, k)
+
 # encrypts the given string "userIn", using the caesar cipher encryption algorithm
 # userIn: the string to be encrypted.
 # key: the number of places to shift each character
 # returns: the encrypted string
-def Caesar_Encrypt (userIn, key):
+def Caesar_Encrypt_Key (userIn, key):
 
     # TODO test other possibilities other than a string list
     
@@ -44,4 +52,4 @@ def Caesar_Encrypt (userIn, key):
 
 # testing
 text = input()
-print (Caesar_Encrypt (text, 3))
+print (Caesar_Encrypt (text))
