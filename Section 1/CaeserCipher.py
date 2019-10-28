@@ -1,9 +1,10 @@
 import random
 # encrypts the given string "userIn" using a randomly generated key
 # userIn: the string to be encrypted
+# returns: a tuple with the encrypted message and the key in that order
 def Caesar_Encrypt (userIn):
     k = random.randrange(0, 100)
-    return Caesar_Encrypt_Key (userIn, k)
+    return (Caesar_Encrypt_Key (userIn, k), k)
 
 # encrypts the given string "userIn", using the caesar cipher encryption algorithm
 # userIn: the string to be encrypted.
