@@ -1,9 +1,11 @@
 # SECTION 1
 
 # TODO remove comments
+import tk
 import random
 import enum
 
+# XXX TODO remove *please*
 alphabetList = []
 
 class Encoding (enum.Enum):
@@ -11,20 +13,13 @@ class Encoding (enum.Enum):
     Unicode = 1
     ASCII = 2
 
-# TODO deprecrate if possible
-def _findIndexInArray (array, item):
-    for i in range (len (array)):
-        if array[i] == item:
-            return i
-        
-    return -1
-
-# encrypts the given string "userIn" using a randomly generated key. Encrypts on Unicode by default
 # userIn: the string to be encrypted
 # returns: a tuple with the encrypted message and the key in that order
 def Caesar_Encrypt (userIn):
+    """encrypts the given string "userIn" using a randomly generated key. Encrypts on Unicode by default"""
+
     k = random.randrange(0, 100)
-    return (Caesar_Encrypt_Key (userIn, k, Encoding.Unicode))
+    return Caesar_Encrypt_Key (userIn, k, Encoding.Unicode)
 
 # TODO remove
 def Set_Custom_Charset (charset):
@@ -53,7 +48,7 @@ def Caesar_Encrypt_Key (userIn, key, encoder):
     elif (encoder == Encoding.Custom):
         for a in range (len (InList)):
             # find the index of the letter in the *input*
-            inIndex = _findIndexInArray (alphabetList, InList[a])
+            inIndex = tk.findIndexInList (alphabetList, InList[a])
 
             # check if the character is supported
             if (inIndex == -1):
@@ -69,12 +64,15 @@ def Caesar_Encrypt_Key (userIn, key, encoder):
     return value
 
 '''
-# testing
-k = "新大久保"
-p = []
-for c in k:
-    p.append (c)
+# Example:
+
+# create the alphabet
+_customAlphabetstr_ = "新大久保"   
+_customAlphabet_ = []
+for c in _customAlphabetstr_:
+    _customAlphabet_.append (c)
 Set_Custom_Charset (p)
 
+# print
 print (Caesar_Encrypt_Key ("大大久保新久新新大新", 1, Encoding.Custom))
 '''

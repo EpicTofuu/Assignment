@@ -1,12 +1,6 @@
 # SECTION 2
 
-# finds the index of an item in a given array
-def findIndexInArray (array, item):
-    for i in range (len (array)):
-        if array[i] == item:
-            return i
-        
-    return -1
+import tk 
 
 # Decrypts a caeser 
 # Returns: a list of tuples that contain both the decrypted message with the corresponding key
@@ -23,7 +17,7 @@ def Decrypt (message, __alphabet__):
         decrypted = ""
         for char in message:
             if (__alphabetlist__.__contains__ (char)):
-                decrypted = decrypted + __alphabetlist__[findIndexInArray (__alphabetlist__, char) - key]
+                decrypted = decrypted + __alphabetlist__[tk.findIndexInList (__alphabetlist__, char) - key]
 
         addable = (decrypted, key)
         value.append (addable)

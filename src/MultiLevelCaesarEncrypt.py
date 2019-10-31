@@ -1,18 +1,11 @@
 # SECTION 3
 
 # no need to rewrite what's already been written
+import tk
+import CaesarEncrypt
+
 from CaesarEncrypt import Caesar_Encrypt_Key
 from CaesarEncrypt import Set_Custom_Charset
-from CaesarEncrypt import Encoding
-
-# appends a character to a string at an index
-def str_append (s, c, i):
-    L = list (s)
-    L.insert (i, c)
-    value = ""
-    for a in L:
-        value += str(a)
-    return value
 
 # shift tuple: (index, key)
 def MultiEncrypt_Recursive (message, shifts, alphabet):
@@ -29,11 +22,11 @@ def __multiEncrypt (message, shifts, alphabet):
     workingshift = shifts[0]
 
     # shift the selected values by the key
-    value = Caesar_Encrypt_Key (message[workingshift[0]:], workingshift[1], Encoding.Custom)
+    value = Caesar_Encrypt_Key (message[workingshift[0]:], workingshift[1], CaesarEncrypt.Encoding.Custom)
     
     # rebuild the non encrypted parts of the message
     for i in range (workingshift[0]):
-        value = str_append (value, message[i], i)
+        value = tk.str_append (value, message[i], i)
 
     # remove current shift
     shifts.pop (0)
