@@ -1,3 +1,5 @@
+# SECTION 1
+
 # TODO remove comments
 import random
 import enum
@@ -17,16 +19,18 @@ def _findIndexInArray (array, item):
         
     return -1
 
-# encrypts the given string "userIn" using a randomly generated key
+# encrypts the given string "userIn" using a randomly generated key. Encrypts on Unicode by default
 # userIn: the string to be encrypted
 # returns: a tuple with the encrypted message and the key in that order
 def Caesar_Encrypt (userIn):
     k = random.randrange(0, 100)
-    return (Caesar_Encrypt_Key (userIn, k), k)
+    return (Caesar_Encrypt_Key (userIn, k, Encoding.Unicode))
 
 # TODO remove
 def Set_Custom_Charset (charset):
     alphabetList.extend(charset)
+
+# TODO clean up if possible
 
 # encrypts the given string "userIn", using the caesar cipher encryption algorithm
 # userIn: the string to be encrypted.
@@ -64,10 +68,13 @@ def Caesar_Encrypt_Key (userIn, key, encoder):
 
     return value
 
+'''
 # testing
 k = "新大久保"
 p = []
 for c in k:
     p.append (c)
 Set_Custom_Charset (p)
+
 print (Caesar_Encrypt_Key ("大大久保新久新新大新", 1, Encoding.Custom))
+'''
