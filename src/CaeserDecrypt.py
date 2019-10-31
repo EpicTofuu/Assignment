@@ -17,8 +17,7 @@ def Decrypt (message, __alphabet__):
     for char in __alphabet__:
         __alphabetlist__.append (char)
 
-    possibledecryptions = []        # list of all possible keys
-    value = []                      # character array of current value
+    value = []          # list of all possible decryptions
 
     for key in range (len(__alphabetlist__)):
         decrypted = ""
