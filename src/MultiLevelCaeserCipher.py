@@ -1,8 +1,8 @@
 # SECTION 3
 
-from CaeserCipher import Caesar_Encrypt_Key
-from CaeserCipher import Set_Custom_Charset
-from CaeserCipher import Encoding
+from CaesarEncrypt import Caesar_Encrypt_Key
+from CaesarEncrypt import Set_Custom_Charset
+from CaesarEncrypt import Encoding
 
 # shift tuple: (index, key)
 def MultiEncrypt (message, shifts, alphabet):
