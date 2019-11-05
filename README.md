@@ -11,7 +11,7 @@ Directories:
 src: contains all python code
 testing: contains bash unit tests
 
-lib: contains all lower level encryption code 
+Cipher: contains all lower level encryption code 
 .\: contains all higher level implementations of encryption code. "The frontend piece of software"
 
 Pseudocode is included in root

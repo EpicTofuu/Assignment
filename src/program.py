@@ -2,12 +2,13 @@
 
 # General collection ! 
 # do not write it here
+
 import os
 import argparse
-import lib.CaesarEncrypt
-import lib.CaesarDecrypt
-import lib.MultiLevelCaesarDecrypt
-import lib.MultiLevelCaesarEncrypt
+import Cipher.CaesarEncrypt
+import Cipher.CaesarDecrypt
+import Cipher.MultiLevelCaesarDecrypt
+import Cipher.MultiLevelCaesarEncrypt
 
 def Args ():
     """Handles argument parsing"""
