@@ -1,14 +1,14 @@
 # SECTION 5
 
-# General collection ! 
-# do not write it here
-
 import os
 import argparse
-import Cipher.CaesarEncrypt
-import Cipher.CaesarDecrypt
-import Cipher.MultiLevelCaesarDecrypt
-import Cipher.MultiLevelCaesarEncrypt
+import lib.CaesarEncrypt
+import lib.CaesarDecrypt
+import lib.MultiLevelCaesarDecrypt
+import lib.MultiLevelCaesarEncrypt
+
+# head of the program, will do everything required
+
 
 def Args ():
     """Handles argument parsing"""
