@@ -4,19 +4,12 @@ import tk
 import random
 import enum
 
-# userIn: the string to be encrypted
-# alphabet: the list of characters to be used in encryption, leaving it as None will mean the unicode standard will be used
-# returns: a tuple with the encrypted message and the key in that order
 def Caesar_Encrypt (userIn: str, alphabet = None) -> tuple:
     """encrypts the given string using a randomly generated key. Encrypts on Unicode by default"""
 
     k = random.randrange(0, 100)
     return (Caesar_Encrypt_Key (userIn, k, alphabet), k)
 
-# TODO: Fix encryption of forbidden characters (line breaks etc)
-# userIn: the string to be encrypted
-# alphabet: the list of characters to be used in encryption, leaving it as None will mean the unicode standard will be used
-# returns: the encrypted string
 def Caesar_Encrypt_Key (userIn: str, key: list, alphabet = None) -> str:  
     """encrypts the given string using the caesar cipher encryption algorithm"""
     InList = []     #list to store user input
