@@ -1,14 +1,22 @@
 # SECTION 5
 
+# General Collection
+# Do Not Write It Here
+
 import os
+import os.path
 import argparse
-import lib.CaesarEncrypt
-import lib.CaesarDecrypt
-import lib.MultiLevelCaesarDecrypt
-import lib.MultiLevelCaesarEncrypt
+import pickle
+import Cipher
+import tk
 
-# head of the program, will do everything required
+Modules = []
+Actions = []
 
+# TODO maybe use reflection
+# import and instantiate each of the modules
+from CaesarEncryptModule import CaesarEncryptMod
+Modules.append (CaesarEncryptMod())
 
 def Args ():
     """Handles argument parsing"""
@@ -16,11 +24,26 @@ def Args ():
     parser.add_argument("ProcessName", metavar="N", type=str, nargs='+', help="The name of the process to run")
     args = parser.parse_args()
     return args
-    
 
+tk.ClearScreen()
 print ("Caesar encryption and decryption")
 print ()
 
-path = os.path.dirname(__file__)
-for f in os.walk(path):
-    print (f[0])
+# display all module actions but also log them into a mega list
+n = 1
+for mod in Modules:
+    for action in mod.Actions:
+        print (str (n) + ") " + action)
+        Actions.append (mod.Actions[action])
+        n += 1
+
+# TODO add input checking
+userin = int (input (""))
+
+# Call the method
+Actions[userin - 1](a) # TODO requires a self call, but i need anonymous calling.. 
+
+'''
+ModulePaths = [f for f in os.listdir(os.getcwd()) if os.path.isfile(os.path.join(os.getcwd(), f))]
+ModulePaths.remove ("program.py")
+'''

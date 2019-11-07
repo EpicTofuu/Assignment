@@ -2,22 +2,16 @@
 
 import tk 
 
-# Decrypts a caeser 
 # Returns: a list of tuples that contain both the decrypted message with the corresponding key
-def Decrypt (message, __alphabet__):
-    
-    # create letters array
-    __alphabetlist__ = []
-    for char in __alphabet__:
-        __alphabetlist__.append (char)
-
+def Caesar_Decrypt (message, alphabet):    
+    """Decrypts the given string using the caesar cipher algorithm"""
     value = []          # list of all possible decryptions
 
-    for key in range (len(__alphabetlist__)):
+    for key in range (len(alphabet)):
         decrypted = "" 
         for char in message:
-            if (__alphabetlist__.__contains__ (char)):
-                decrypted = decrypted + __alphabetlist__[tk.findIndexInList (__alphabetlist__, char) - key]
+            if (alphabet.__contains__ (char)):
+                decrypted = decrypted + alphabet[tk.findIndexInList (alphabet, char) - key]
 
         addable = (decrypted, key)
         value.append (addable)
