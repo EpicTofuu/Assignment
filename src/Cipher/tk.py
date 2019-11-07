@@ -31,15 +31,3 @@ def str_append (s: str, c: str, i: int) -> str:
         value += str(a)
 
     return value
-
-def IncrementTuple (tup: tuple, inc: int) -> tuple:
-    """Given an upper limit, a tuple can be increased, where an overflow in x will result in an increment in y"""
-    x = 0
-    y = 0
-    if (tup[0] + inc > tup[1]):
-        x = inc % tup[1]
-        y = tup[1] + 1        
-    else:
-        x = tup[0] + 1
-
-    return (x,y)

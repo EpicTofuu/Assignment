@@ -1,60 +1,45 @@
 # SECTION 1
 
-# TODO remove comments
 import tk
 import random
 import enum
 
-# XXX TODO remove *please*
-alphabetList = []
-
-class Encoding (enum.Enum):
-    Custom = 0  
-    Unicode = 1
-    ASCII = 2
-
 # userIn: the string to be encrypted
+# alphabet: the list of characters to be used in encryption, leaving it as None will mean the unicode standard will be used
 # returns: a tuple with the encrypted message and the key in that order
-def Caesar_Encrypt (userIn):
-    """encrypts the given string "userIn" using a randomly generated key. Encrypts on Unicode by default"""
+def Caesar_Encrypt (userIn: str, alphabet = None) -> tuple:
+    """encrypts the given string using a randomly generated key. Encrypts on Unicode by default"""
 
     k = random.randrange(0, 100)
-    return Caesar_Encrypt_Key (userIn, k, Encoding.Unicode)
+    return (Caesar_Encrypt_Key (userIn, k, alphabet), k)
 
-# TODO remove
-def Set_Custom_Charset (charset):
-    alphabetList.extend(charset)
-
-# TODO clean up if possible
-
-# encrypts the given string "userIn", using the caesar cipher encryption algorithm
-# userIn: the string to be encrypted.
-# key: the number of places to shift each character
+# TODO: Fix encryption of forbidden characters (line breaks etc)
+# userIn: the string to be encrypted
+# alphabet: the list of characters to be used in encryption, leaving it as None will mean the unicode standard will be used
 # returns: the encrypted string
-def Caesar_Encrypt_Key (userIn, key, encoder):  
+def Caesar_Encrypt_Key (userIn: str, key: list, alphabet = None) -> str:  
+    """encrypts the given string using the caesar cipher encryption algorithm"""
     InList = []     #list to store user input
 
     # Convert the string input to character list
     for i in userIn:
         InList.append (i)
 
-    if (encoder == Encoding.Unicode):
+    # assume that the user wants to encrypt using the entire unicode standard
+    if (alphabet == None):
         for a in range (len(InList)):
             inIndex = ord (InList[a])                   # find the index of the letter in the *input*
-            InList[a]= chr((inIndex + key) % 137439)    # convert back to character TODO fix modulo operator    
-    elif (encoder == Encoding.ASCII):
-        # TODO
-        raise Exception ("not implemented yet")
-    elif (encoder == Encoding.Custom):
+            InList[a]= chr((inIndex + key))      
+    else:   # Otherwise, just use the given alphabet
         for a in range (len (InList)):
             # find the index of the letter in the *input*
-            inIndex = tk.findIndexInList (alphabetList, InList[a])
+            inIndex = tk.findIndexInList (alphabet, InList[a])
 
             # check if the character is supported
             if (inIndex == -1):
                 raise Exception ("Character not supported")
 
-            InList[a] = alphabetList[(inIndex + key) % len(alphabetList)]       
+            InList[a] = alphabet[(inIndex + key) % len(alphabet)]       
 
     # convert the list back into a string
     value = ""
@@ -78,5 +63,4 @@ print (Caesar_Encrypt_Key ("大大久保新久新新大新", 1, Encoding.Custom)
 
 
 print (Caesar_Encrypt_Key ("My name is yun", 24, Encoding.Unicode))
-# TODO: fix line breaks
 '''
