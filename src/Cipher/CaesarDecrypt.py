@@ -14,7 +14,7 @@ def Decrypt (message, __alphabet__):
     value = []          # list of all possible decryptions
 
     for key in range (len(__alphabetlist__)):
-        decrypted = ""
+        decrypted = "" 
         for char in message:
             if (__alphabetlist__.__contains__ (char)):
                 decrypted = decrypted + __alphabetlist__[tk.findIndexInList (__alphabetlist__, char) - key]
