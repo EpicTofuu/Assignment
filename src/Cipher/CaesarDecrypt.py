@@ -28,10 +28,6 @@ def _importLanguage (language) -> dict:
         freq = lines [i + 1].strip()
 
         value [letter] = freq
-        '''
-        if (HasCapitals):        # includes the set of all capitals/lowercase if applicable
-            value[letter.swapcase()] = freq
-            '''
 
     return value
 
@@ -49,28 +45,46 @@ def Caesar_Decrypt (message, alphabet):
 
     return value 
 
-def Smart_Caesar_Decrypt (message, alphabet, language = "English"):
-    """uses the chi squared algorithm to sort keys based on the probability of them returning a word in a given language.
-    Language distribution packs can be added to the LanguageCharDistributions folder in the library"""
+def Smart_Caesar_Decrypt (message, alphabet, language = "English", giveTuple = True):
+    """
+    uses the chi squared algorithm to sort keys based on the probability of them returning a word in a given language.
+    Language distribution packs can be added to the LanguageCharDistributions folder in the library
+    Returns a tuple in the form (decryption, chi index, key)
+    """
 
-    value = []
-    LanDist = _importLanguage (language)
+    value = []                              # used to hold all combinations, with respective chi indexes and keys
+    LanDist = _importLanguage (language)    # list of all characters with their frequency distributions
     
-    for key in range (0, len (alphabet)):   # iterate over all keys
+    # iterate over all keys
+    for key in range (0, len (alphabet)):   
         chiIndex = 0
         msg = Caesar_decrypt_Key (message, alphabet, key)
+
         # iterate over all characters *in the language distribution file*
         for alpha in LanDist:                   
+
+            # Get a list of all characters that are in the string that are not included in the distribution file 
+            # (this is to prevent the calculations of longer message lengths that throw off the chi algorithm with symbols)
+            voidChar = 0
+            for char in msg:
+                if (not list (LanDist.keys()).__contains__ (char.upper())):
+                    voidChar += 1
+
             c = msg.count (alpha) + msg.count (alpha.swapcase())                            # include both lowercase and uppercase                                                      Actual count
-            e = len(msg) * float (LanDist [alpha]) if float(LanDist[alpha]) > 0 else 0.01   # prevent a division by zero on the off chance the frequency distribution is zero           Expected count
+            e = (len(msg) - voidChar) * float (LanDist [alpha]) if float(LanDist[alpha]) > 0 else 0.01   # prevent a division by zero on the off chance the frequency distribution is zero           Expected count
 
             # using the chi-squared formula
             chiIndex += ((c - e) ** 2) / e
-        v = (msg, chiIndex, key)
-        value.append (v)
-    value.sort (key = lambda t: t[1]) # sort to smallest chi index
-    return value
 
+        v = (msg, chiIndex, key)
+        value.append (v)    # append the item to the value list
+
+    value.sort (key = lambda t: t[1]) # sort to smallest chi index
+
+    if (not giveTuple):
+        return value[0]
+    
+    return value
 
 def Caesar_decrypt_Key (message, alphabet, key):
     """decrypts a string using a given key"""
@@ -81,29 +95,17 @@ def Caesar_decrypt_Key (message, alphabet, key):
 
     return decrypted
 
-# testing do write it here
-a = "abcdefghijklmnopqrstuvwxyz"
-p=[]
-for c in a:
-    p.append (c)
-
-o = Smart_Caesar_Decrypt ("aoljhlzhyjpwolypzvulvmaollhysplzaruvduhukzptwslzajpwolyzpapzhafwlvmzbizapabapvujpwolypudopjolhjoslaalypuaolwshpualeapzzopmalkhjlyahpuubtilyvmwshjlzkvduaolhswohila", p, "English")
-
-f = open ("output.txt", "w+")
-for i in o:
-    f.write (str(i) + "\n")   
-
-f.close()
-
-print ("done !")
-
 '''
-a = "でんしゃがまいりますごちゅういください "
+# EXAMPLE
+# testing do write it here
+a = "abcdefghijklmnopqrstuvwxyz "
 p=[]
 for c in a:
     p.append (c)
-o = Smart_Caesar_Decrypt ("ますごちゅういくうさいでんしいがまいい", p, "Japanese")
+o = Smart_Caesar_Decrypt ("very cool and good yes yes", p, "English", False)
 
-for i in o:
-    print (i)
-    '''
+print (o)
+
+print ("done!")  
+'''
+    

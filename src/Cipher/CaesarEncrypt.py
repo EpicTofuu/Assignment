@@ -42,9 +42,10 @@ def Caesar_Encrypt_Key (userIn: str, key: list, alphabet = None) -> str:
     return value
 
 
-a = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+# testing do write it here
+a = "でんしゃがまいりますごちゅういください "
 p=[]
 for c in a:
     p.append (c)
 
-print (Caesar_Encrypt_Key ("COOLANDGOOD", 8, a))
+print (Caesar_Encrypt_Key ("でんしゃがまいります", 3, a))

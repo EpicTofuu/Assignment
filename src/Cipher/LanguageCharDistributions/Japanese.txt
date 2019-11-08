@@ -1,4 +1,3 @@
-!
 = Statistics taken from https://gawron.sdsu.edu/crypto/japanese_models/hir_freq.html
 = Important to note that this file contains only freq distributions for hiragana and katakana. The set of all kanji is not included
 = Interestingly enough, the set of all romaji is also included, albeit, encoded differently
