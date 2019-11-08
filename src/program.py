@@ -10,8 +10,8 @@ import pickle
 import Cipher
 import tk
 
-Modules = []
-Actions = []
+Modules = []    # stores all modules
+Actions = []    # stores all actions in modules and the module itself
 
 # TODO maybe use reflection
 # import and instantiate each of the modules
@@ -34,14 +34,14 @@ n = 1
 for mod in Modules:
     for action in mod.Actions:
         print (str (n) + ") " + action)
-        Actions.append (mod.Actions[action])
+        Actions.append ((mod.Actions[action], mod))
         n += 1
 
 # TODO add input checking
 userin = int (input (""))
 
 # Call the method
-Actions[userin - 1](a) # TODO requires a self call, but i need anonymous calling.. 
+Actions[userin - 1][0](Actions[userin - 1][1])
 
 '''
 ModulePaths = [f for f in os.listdir(os.getcwd()) if os.path.isfile(os.path.join(os.getcwd(), f))]

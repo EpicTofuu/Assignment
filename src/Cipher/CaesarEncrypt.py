@@ -41,19 +41,10 @@ def Caesar_Encrypt_Key (userIn: str, key: list, alphabet = None) -> str:
 
     return value
 
-'''
-# Example:
 
-# create the alphabet
-_customAlphabetstr_ = "新大久保"   
-_customAlphabet_ = []
-for c in _customAlphabetstr_:
-    _customAlphabet_.append (c)
-Set_Custom_Charset (p)
+a = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+p=[]
+for c in a:
+    p.append (c)
 
-# print
-print (Caesar_Encrypt_Key ("大大久保新久新新大新", 1, Encoding.Custom))
-
-
-print (Caesar_Encrypt_Key ("My name is yun", 24, Encoding.Unicode))
-'''
+print (Caesar_Encrypt_Key ("TESTING", 3, a))
