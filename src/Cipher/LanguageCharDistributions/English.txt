@@ -1,3 +1,4 @@
+= Statistics taken from: http://pi.math.cornell.edu/~mec/2003-2004/cryptography/subs/frequencies.html
 E
 12.02
 T
