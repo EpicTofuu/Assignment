@@ -6,93 +6,77 @@ import pickle
 import tk 
 
 def _importLanguage (language) -> dict:
-    value = dict() 
-    lines = []
+	value = dict() 
+	lines = []
 
-    dirName = os.path.dirname (__file__)
-    
-    # Find languages
-    languagePath = os.path.join (dirName, "LanguageCharDistributions", language) + ".txt"
-    if (not os.path.exists (languagePath)):
-        raise Exception (languagePath + " does not exist")
-    
-    f = open (languagePath, encoding="utf-8")
+	dirName = os.path.dirname (__file__)
+	
+	# Find languages
+	languagePath = os.path.join (dirName, "LanguageCharDistributions", language) + ".txt"
+	if (not os.path.exists (languagePath)):
+		raise Exception (languagePath + " does not exist")
+	
+	f = open (languagePath, encoding="utf-8")
 
-    for l in f:
-        if (l[0] != "="): 
-            lines.append (l)
+	for l in f:
+		if (l[0] != "="): 
+			lines.append (l)
 
-    for i in range (0, len (lines), 2):
-        letter = lines[i].strip()
-        freq = lines [i + 1].strip()
+	for i in range (0, len (lines), 2):
+		letter = lines[i].strip()
+		freq = lines [i + 1].strip()
 
-        value [letter] = freq
+		value [letter] = freq
 
-    return value
-
+	return value
 
 # Returns: a list of tuples that contain both the decrypted message with the corresponding key
 def Caesar_Decrypt (message, alphabet):    
-    """Decrypts the given string using the caesar cipher algorithm"""
-    value = []          # list of all possible decryptions
+	"""Decrypts the given string using the caesar cipher algorithm"""
+	value = []          # list of all possible decryptions
 
-    for key in range (len(alphabet)):
-        decrypted = Caesar_decrypt_Key (message, alphabet, key)
+	for key in range (len(alphabet)):
+		decrypted = Caesar_decrypt_Key (message, alphabet, key)
 
-        addable = (decrypted, key)
-        value.append (addable)
+		addable = (decrypted, key)
+		value.append (addable)
 
-    return value 
+	return value 
 
-def Smart_Caesar_Decrypt (message, alphabet, language = "English", giveTuple = True):
-    """
-    uses the chi squared algorithm to sort keys based on the probability of them returning a word in a given language.
-    Language distribution packs can be added to the LanguageCharDistributions folder in the library
-    Returns a tuple in the form (decryption, chi index, key)
-    """
+def Smart_Caesar_Decrypt (message, alphabet, lan = "English", giveTuple = True):
+	"""
+	uses the chi squared algorithm to sort keys based on the probability of them returning a word in a given language.
+	Language distribution packs can be added to the LanguageCharDistributions folder in the library
+	Returns a tuple in the form (decryption, chi index, key)
+	"""
 
-    value = []                              # used to hold all combinations, with respective chi indexes and keys
-    LanDist = _importLanguage (language)    # list of all characters with their frequency distributions
-    
-    # iterate over all keys
-    for key in range (0, len (alphabet)):   
-        chiIndex = 0
-        msg = Caesar_decrypt_Key (message, alphabet, key)
+	value = []                              # used to hold all combinations, with respective chi indexes and keys
+	
+	# iterate over all keys
+	for key in range (0, len (alphabet)):   
+		msg = Caesar_decrypt_Key (message, alphabet, key)
 
-        # iterate over all characters *in the language distribution file*
-        for alpha in LanDist:                   
+		# Get the chi index for the decrypted string
+		chiIndex = tk.GetChiSquared (msg, lan)
+		
+		v = (msg, chiIndex, key)
+		value.append (v)    # append the item to the value list
 
-            # Get a list of all characters that are in the string that are not included in the distribution file 
-            # (this is to prevent the calculations of longer message lengths that throw off the chi algorithm with symbols)
-            voidChar = 0
-            for char in msg:
-                if (not list (LanDist.keys()).__contains__ (char.upper())):
-                    voidChar += 1
+	value.sort (key = lambda t: t[1]) # sort to smallest chi index
 
-            c = msg.count (alpha) + msg.count (alpha.swapcase())                                         # include both lowercase and uppercase                                                      Actual count
-            e = (len(msg) - voidChar) * float (LanDist [alpha]) if float(LanDist[alpha]) > 0 else 0.01   # prevent a division by zero on the off chance the frequency distribution is zero           Expected count
-
-            # using the chi-squared formula
-            chiIndex += ((c - e) ** 2) / e
-
-        v = (msg, chiIndex, key)
-        value.append (v)    # append the item to the value list
-
-    value.sort (key = lambda t: t[1]) # sort to smallest chi index
-
-    # return the value as required
-    if (not giveTuple):
-        return value[0]    
-    return value
+	# return the value as required
+	if (not giveTuple):
+		return value[0]    
+	return value
 
 def Caesar_decrypt_Key (message, alphabet, key):
-    """decrypts a string using a given key"""
-    decrypted = "" 
-    for char in message:
-        if (alphabet.__contains__ (char)):
-            decrypted = decrypted + alphabet[tk.findIndexInList (alphabet, char) - key]
+	"""decrypts a string using a given key"""
+	decrypted = "" 
+	for char in message:
+		if (alphabet.__contains__ (char)):
+			decrypted = decrypted + alphabet[tk.findIndexInList (alphabet, char) - key]
 
-    return decrypted
+	return decrypted
 
 
 # EXAMPLE
@@ -100,7 +84,7 @@ def Caesar_decrypt_Key (message, alphabet, key):
 a = "ABCDEFGHIJKLMNOPQRSTUVWXYZ "
 p=[]
 for c in a:
-    p.append (c)
+	p.append (c)
 
 o = Smart_Caesar_Decrypt ("GRQCLVCVPDUW", p)
 
@@ -108,4 +92,4 @@ print (o)
 
 print ("done!")  
 
-    
+	
