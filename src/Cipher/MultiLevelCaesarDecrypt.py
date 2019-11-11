@@ -1,6 +1,5 @@
 # TODO optimise
 
-# try except import pattern, imports according to where the library is called from
 try:
     import Cipher.tk
     from Cipher.MultiLevelCaesarEncrypt import EncryptDecryptCoord    

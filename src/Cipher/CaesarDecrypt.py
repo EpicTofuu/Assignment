@@ -17,7 +17,6 @@ def _importLanguage (language) -> dict:
         raise Exception (languagePath + " does not exist")
     
     f = open (languagePath, encoding="utf-8")
-    #HasCapitals = f.readline() != "!"    # does the language have capitals? Really only important for non-european languages where the alphabet does not contain capitals
 
     for l in f:
         if (l[0] != "="): 
@@ -70,7 +69,7 @@ def Smart_Caesar_Decrypt (message, alphabet, language = "English", giveTuple = T
                 if (not list (LanDist.keys()).__contains__ (char.upper())):
                     voidChar += 1
 
-            c = msg.count (alpha) + msg.count (alpha.swapcase())                            # include both lowercase and uppercase                                                      Actual count
+            c = msg.count (alpha) + msg.count (alpha.swapcase())                                         # include both lowercase and uppercase                                                      Actual count
             e = (len(msg) - voidChar) * float (LanDist [alpha]) if float(LanDist[alpha]) > 0 else 0.01   # prevent a division by zero on the off chance the frequency distribution is zero           Expected count
 
             # using the chi-squared formula
@@ -81,9 +80,9 @@ def Smart_Caesar_Decrypt (message, alphabet, language = "English", giveTuple = T
 
     value.sort (key = lambda t: t[1]) # sort to smallest chi index
 
+    # return the value as required
     if (not giveTuple):
-        return value[0]
-    
+        return value[0]    
     return value
 
 def Caesar_decrypt_Key (message, alphabet, key):
@@ -95,17 +94,18 @@ def Caesar_decrypt_Key (message, alphabet, key):
 
     return decrypted
 
-'''
+
 # EXAMPLE
 # testing do write it here
-a = "abcdefghijklmnopqrstuvwxyz "
+a = "ABCDEFGHIJKLMNOPQRSTUVWXYZ "
 p=[]
 for c in a:
     p.append (c)
-o = Smart_Caesar_Decrypt ("very cool and good yes yes", p, "English", False)
+
+o = Smart_Caesar_Decrypt ("GRQCLVCVPDUW", p)
 
 print (o)
 
 print ("done!")  
-'''
+
     
