@@ -3,7 +3,10 @@
 import random
 import enum
 
-from Cipher.tk import findIndexInList
+try:
+    from Cipher.tk import findIndexInList
+except:
+    from tk import findIndexInList
 
 def Caesar_Encrypt (userIn: str, alphabet = None) -> tuple:
     """encrypts the given string using a randomly generated key. Encrypts on Unicode by default"""

@@ -1,13 +1,9 @@
 # TODO optimise
 
 try:
-    import Cipher.tk
-    from Cipher.MultiLevelCaesarEncrypt import EncryptDecryptCoord    
-    from Cipher.MultiLevelCaesarEncrypt import Mode
+    import Cipher.tk  
 except:
     import tk
-    from MultiLevelCaesarEncrypt import EncryptDecryptCoord  
-    from MultiLevelCaesarEncrypt import Mode
 
 
 def MultiDecrypt_Recursive (message, alphabet, iterations, includeNonNElements = False, includeZerothIteration = True) -> list:
@@ -16,7 +12,7 @@ def MultiDecrypt_Recursive (message, alphabet, iterations, includeNonNElements =
     # Generate all possible *decryptions* under the 0th iteration
     for I in range (len(message)):
         for n in range (len(alphabet)):
-            msg = EncryptDecryptCoord(message, (I,n), alphabet, Mode.DECRYPT)
+            msg = tk.EncryptDecryptCoord(message, (I,n), alphabet, tk.Mode.DECRYPT)
             A.append ((msg, (I, n)))
 
     return _multiDecrypt_Recursive (iterations, message, alphabet, A, includeNonNElements)
@@ -27,12 +23,12 @@ def _multiDecrypt_Recursive (it: int, message, alphabet: str, A, includeNonNElem
         V.clear()
 
     B = []  # contains all *found* elements
-
+    
     # for each element in A, generate a set of messages using all possible keys
     for e in A:
         for I in range (1, len(message)):
             for n in range (1, len(alphabet)):
-                ap = (EncryptDecryptCoord (e[0], (I, n), alphabet), (I, n), Mode.DECRYPT)
+                ap = (tk.EncryptDecryptCoord (e[0], (I, n), alphabet, tk.Mode.DECRYPT), (I,n))
                 B.append (ap)
         
     V.extend (B)        

@@ -13,11 +13,14 @@ import tkProg
 Modules = []    # stores all modules
 Actions = []    # stores all actions in modules and the module itself
 
-# TODO maybe use reflection
 # import and instantiate each of the modules
 from CaesarEncryptModule import CaesarEncryptMod
 Modules.append (CaesarEncryptMod())
 
+
+
+# TODO
+'''
 # import all modules except the program itself !
 ModulePaths = [f for f in os.listdir(os.getcwd()) if os.path.isfile(os.path.join(os.getcwd(), f))]
 ModulePaths.remove ("program.py") 
@@ -25,6 +28,7 @@ ModulePaths.remove ("program.py")
 for module in ModulePaths:
     __import__ (os.path.splitext(os.path.basename(module))[0])
     Modules.append ()
+    '''
 
 def Args ():
     """Handles argument parsing"""
@@ -50,7 +54,3 @@ userin = int (input (""))
 
 # Call the method
 Actions[userin - 1][0](Actions[userin - 1][1])
-
-'''
-
-'''
