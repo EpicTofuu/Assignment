@@ -1,8 +1,9 @@
 # SECTION 1
 
-import tk
 import random
 import enum
+
+from Cipher.tk import findIndexInList
 
 def Caesar_Encrypt (userIn: str, alphabet = None) -> tuple:
     """encrypts the given string using a randomly generated key. Encrypts on Unicode by default"""
@@ -19,14 +20,14 @@ def Caesar_Encrypt_Key (userIn: str, key: list, alphabet = None) -> str:
         InList.append (i)
 
     # assume that the user wants to encrypt using the entire unicode standard
-    if (alphabet == None):
+    if (alphabet == None or len(alphabet) == 0):
         for a in range (len(InList)):
             inIndex = ord (InList[a])                   # find the index of the letter in the *input*
             InList[a]= chr((inIndex + key))      
     else:   # Otherwise, just use the given alphabet
         for a in range (len (InList)):
             # find the index of the letter in the *input*
-            inIndex = tk.findIndexInList (alphabet, InList[a])
+            inIndex = findIndexInList (alphabet, InList[a])
 
             # check if the character is supported
             if (inIndex == -1):
@@ -42,6 +43,7 @@ def Caesar_Encrypt_Key (userIn: str, key: list, alphabet = None) -> str:
     return value
 
 
+'''
 # testing do write it here
 a = "ABCDEFGHIJKLMNOPQRSTUVWXYZ "
 p=[]
@@ -49,3 +51,4 @@ for c in a:
     p.append (c)
 
 print (Caesar_Encrypt_Key ("DON IS SMART", 3, a))
+'''

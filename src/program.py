@@ -8,7 +8,7 @@ import os.path
 import argparse
 import pickle
 import Cipher
-import tk
+import tkProg
 
 Modules = []    # stores all modules
 Actions = []    # stores all actions in modules and the module itself
@@ -18,6 +18,14 @@ Actions = []    # stores all actions in modules and the module itself
 from CaesarEncryptModule import CaesarEncryptMod
 Modules.append (CaesarEncryptMod())
 
+# import all modules except the program itself !
+ModulePaths = [f for f in os.listdir(os.getcwd()) if os.path.isfile(os.path.join(os.getcwd(), f))]
+ModulePaths.remove ("program.py") 
+
+for module in ModulePaths:
+    __import__ (os.path.splitext(os.path.basename(module))[0])
+    Modules.append ()
+
 def Args ():
     """Handles argument parsing"""
     parser = argparse.ArgumentParser(description="Directly run a process from the run command")
@@ -25,7 +33,7 @@ def Args ():
     args = parser.parse_args()
     return args
 
-tk.ClearScreen()
+tkProg.ClearScreen()
 print ("Caesar encryption and decryption")
 print ()
 
@@ -44,6 +52,5 @@ userin = int (input (""))
 Actions[userin - 1][0](Actions[userin - 1][1])
 
 '''
-ModulePaths = [f for f in os.listdir(os.getcwd()) if os.path.isfile(os.path.join(os.getcwd(), f))]
-ModulePaths.remove ("program.py")
+
 '''
