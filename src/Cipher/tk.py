@@ -46,8 +46,8 @@ def EncryptDecryptCoord (message, tup, alphabet, mode) -> str:
     c = str(message[tup[0]:])
     for k in range(len(c)):
         workingalphabetID = findIndexInList (alphabet, c[k]) 
-        o = workingalphabetID + tup[1] if mode == Mode.ENCRYPT else workingalphabetID - tup[1]
-        value = str_append (value, alphabet[o % len(alphabet)], k)
+        o = workingalphabetID + tup[1] if mode == Mode.ENCRYPT else workingalphabetID - tup[1]      # add or subtract based on whether to encrypt or decrypt
+        value = str_append (value, alphabet[o % len(alphabet)], k)                                  # convert back to character
     
     # Restore the string
     for a in range(tup[0]):

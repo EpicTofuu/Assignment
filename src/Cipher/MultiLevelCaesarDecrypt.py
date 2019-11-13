@@ -19,7 +19,8 @@ def MultiDecrypt_Recursive (message, alphabet, iterations, usables = 1, lan = "E
 
     #return A    
     A.sort (key = lambda t: t[2]) # sort to smallest chi index
-    A = A[:usables]   
+    L = round (usables)
+    A = A[:L]   
     return _multiDecrypt_Recursive (iterations, message, alphabet, A, usables, lan)
 
 def _multiDecrypt_Recursive (it: int, message, alphabet: str, V, usables: int, lan) -> tuple:
@@ -52,7 +53,8 @@ def _multiDecrypt_Recursive (it: int, message, alphabet: str, V, usables: int, l
         _multiDecrypt_Recursive (it, message, alphabet, V, usables, lan)   
     
     # return the value after n iterations
-    return V
+    return V + _multiDecrypt_Recursive ()
+    # https://stackoverflow.com/questions/32514605/python-list-recursive-changes
 
 
 # testing do write it here
@@ -61,5 +63,5 @@ p=[]
 for c in a:
     p.append (c)
 print ("starting...")
-print (MultiDecrypt_Recursive ("wivbdgsspderhditmgdwxbpi", p, 1, 6))
+print (MultiDecrypt_Recursive ("eqpbkugblyegavj b", p, 3, 2))
 # original 231

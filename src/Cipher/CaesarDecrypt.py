@@ -5,31 +5,6 @@ import os.path
 import pickle
 import tk 
 
-def _importLanguage (language) -> dict:
-	value = dict() 
-	lines = []
-
-	dirName = os.path.dirname (__file__)
-	
-	# Find languages
-	languagePath = os.path.join (dirName, "LanguageCharDistributions", language) + ".txt"
-	if (not os.path.exists (languagePath)):
-		raise Exception (languagePath + " does not exist")
-	
-	f = open (languagePath, encoding="utf-8")
-
-	for l in f:
-		if (l[0] != "="): 
-			lines.append (l)
-
-	for i in range (0, len (lines), 2):
-		letter = lines[i].strip()
-		freq = lines [i + 1].strip()
-
-		value [letter] = freq
-
-	return value
-
 # Returns: a list of tuples that contain both the decrypted message with the corresponding key
 def Caesar_Decrypt (message, alphabet):    
 	"""Decrypts the given string using the caesar cipher algorithm"""
@@ -53,7 +28,7 @@ def Smart_Caesar_Decrypt (message, alphabet, lan = "English", giveTuple = True):
 	value = []                              # used to hold all combinations, with respective chi indexes and keys
 	
 	# iterate over all keys
-	for key in range (0, len (alphabet)):   
+	for key in range (len (alphabet)):   
 		msg = Caesar_decrypt_Key (message, alphabet, key)
 
 		# Get the chi index for the decrypted string
@@ -65,9 +40,7 @@ def Smart_Caesar_Decrypt (message, alphabet, lan = "English", giveTuple = True):
 	value.sort (key = lambda t: t[1]) # sort to smallest chi index
 
 	# return the value as required
-	if (not giveTuple):
-		return value[0]    
-	return value
+	return value if giveTuple else value[0]
 
 def Caesar_decrypt_Key (message, alphabet, key):
 	"""decrypts a string using a given key"""
@@ -78,7 +51,7 @@ def Caesar_decrypt_Key (message, alphabet, key):
 
 	return decrypted
 
-
+'''
 # EXAMPLE
 # testing do write it here
 a = "ABCDEFGHIJKLMNOPQRSTUVWXYZ "
@@ -91,5 +64,4 @@ o = Smart_Caesar_Decrypt ("GRQCLVCVPDUW", p)
 print (o)
 
 print ("done!")  
-
-	
+'''

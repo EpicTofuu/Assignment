@@ -6,3 +6,6 @@ from os import system
 
 def ClearScreen():
     system ("clear")
+
+def Pause ():
+    input("press enter to continue...")

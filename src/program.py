@@ -10,13 +10,20 @@ import pickle
 import Cipher
 import tkProg
 
+from os.path import join, isdir, dirname
+
 Modules = []    # stores all modules
 Actions = []    # stores all actions in modules and the module itself
 
+from AlphabetScannerModule import AlphabetScannerMod
+AlphabetMod = AlphabetScannerMod()
+
 # import and instantiate each of the modules
 from CaesarEncryptModule import CaesarEncryptMod
-Modules.append (CaesarEncryptMod())
+Modules.append (CaesarEncryptMod(AlphabetMod))
 
+# note, even if the modules are added automatically, always add the alphabet scanner manually and do it *last*
+Modules.append (AlphabetMod)
 
 
 # TODO

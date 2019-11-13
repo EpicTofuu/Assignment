@@ -9,8 +9,9 @@ class CaesarEncryptMod ():
 
     Actions = dict() 
     
-    def __init__ (self):
+    def __init__ (self, alphabet):
         self.Name = "Caesar Encryption"
+        self.AlphabetContainer = alphabet
 
     def EncryptTxt (self):
         # take inputs
@@ -21,18 +22,10 @@ class CaesarEncryptMod ():
         tkProg.ClearScreen()
         # TODO add a way to input the key into the file
         key = input ("input the value of the key to encrypt with, leave as blank for a randomly generated key")
-        alphabetPath = input ("input path to alphabet, leave as blank for UNICODE standard")
-
+        
+        alphabet = self.AlphabetContainer.TakeAlphabets ()
+            
         value = "" 
-        alphabet = []
-
-        # TODO move this into an alphabet class
-        if (exists (alphabetPath)):
-            f = open (path)
-            alphabetStr = f.readline
-            for c in alphabetStr:
-                alphabet.append (c)
-
 
         # read the file 
         if (exists (path)):     # verify that the file exists

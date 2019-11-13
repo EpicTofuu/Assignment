@@ -28,7 +28,7 @@ p=[]
 for c in a:
     p.append (c)
 
-ere = MultiEncrypt_Key ("very cool and epic style", [(0,1), (1,2), (1, 1)], p)
+ere = MultiEncrypt_Key ("don is very smart", [(0,1), (12,2), (1, 1), (6, 5)], p)
 print (ere)
 
 '''

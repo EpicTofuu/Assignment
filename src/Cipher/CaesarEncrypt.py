@@ -32,11 +32,10 @@ def Caesar_Encrypt_Key (userIn: str, key: list, alphabet = None) -> str:
             # find the index of the letter in the *input*
             inIndex = findIndexInList (alphabet, InList[a])
 
-            # check if the character is supported
-            if (inIndex == -1):
-                raise Exception ("Character not supported")
-
-            InList[a] = alphabet[(inIndex + key) % len(alphabet)]       
+            # check if the character is supported, act accordingly
+            if (inIndex != -1):
+                InList[a] = alphabet[(inIndex + key) % len(alphabet)]   
+    
 
     # convert the list back into a string
     value = ""
