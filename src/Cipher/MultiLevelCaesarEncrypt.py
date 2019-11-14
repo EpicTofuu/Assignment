@@ -1,37 +1,42 @@
 # SECTION 3
 
-import tk
-import random
 
-try:
-    from Cipher.CaesarEncrypt import Caesar_Encrypt_Key
-    from Cipher.CaesarEncrypt import Set_Custom_Charset
-    import Cipher.CaesarEncrypt
-except:    
-    import CaesarEncrypt
-    from CaesarEncrypt import Caesar_Encrypt_Key
+import random
+from Cipher.tk import EncryptDecryptCoord, Mode
+from Cipher.CaesarEncrypt import Caesar_Encrypt_Key
+
+def MultiEncrypt (message : str, alphabet = None, numOfShifts = 3):
+    """multi encrypts a message using a pre generated list of shifts"""
+    shifts = []
+    for i in range (numOfShifts + 1):
+        shifts.append ((random.randrange (len(message) - 1), (random.randrange(len(alphabet)))))
+
+    return (MultiEncrypt_Key (message, shifts, alphabet), shifts)
 
 def MultiEncrypt_Key (message: str, shifts: list, alphabet = None):
-    """ multi encrypts a message using the caesar cipher"""
+    """ multi encrypts a message using a given list of shifts"""
 
-    value = tk.EncryptDecryptCoord (message, shifts[0], alphabet, tk.Mode.ENCRYPT)        # shift the first element
-    shifts.pop(0)
+    _shifts= []
+    _shifts.extend(shifts)
+    value = EncryptDecryptCoord (message, _shifts[0], alphabet, Mode.ENCRYPT)        # shift the first element
+    _shifts.pop(0)
 
-    for workingshift in shifts:
-        value = tk.EncryptDecryptCoord (value, workingshift, alphabet, tk.Mode.ENCRYPT)   # shift all subsequent
+    for workingshift in _shifts:
+        value = EncryptDecryptCoord (value, workingshift, alphabet, Mode.ENCRYPT)   # shift all subsequent
 
     return value
 
+
 # testing do write it here
+'''
 a = "abcdefghijklmnopqrstuvwxyz "
 p=[]
 for c in a:
     p.append (c)
 
-ere = MultiEncrypt_Key ("don is very smart", [(0,1), (12,2), (1, 1), (6, 5)], p)
+ere = MultiEncrypt ("don is very smart", p)
 print (ere)
 
-'''
 A = tk.EncryptDecryptCoord ("231", (0,1), p, tk.Mode.ENCRYPT)
 B = tk.EncryptDecryptCoord (A, (1,2), p, tk.Mode.ENCRYPT)
 C = tk.EncryptDecryptCoord (B, (1,1), p, tk.Mode.ENCRYPT)

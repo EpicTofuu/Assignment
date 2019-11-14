@@ -22,7 +22,7 @@ class CaesarEncryptMod:
             
         value = "" 
 
-        # read the file 
+        # read the file and encrypt
         if (exists (path)):     # verify that the file exists
             f = open (path)
             msg = f.readline ()

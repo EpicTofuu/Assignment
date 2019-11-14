@@ -43,7 +43,7 @@ def EncryptDecryptCoord (message, tup, alphabet, mode) -> str:
     """Decrypts or encrypts one coordinate (s, k) for s is the shift and k is the key"""
 
     value = ""
-    c = str(message[tup[0]:])
+    c = str(message[tup[0] % len (message):])
     for k in range(len(c)):
         workingalphabetID = findIndexInList (alphabet, c[k]) 
         o = workingalphabetID + tup[1] if mode == Mode.ENCRYPT else workingalphabetID - tup[1]      # add or subtract based on whether to encrypt or decrypt

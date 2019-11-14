@@ -19,11 +19,18 @@ from AlphabetScannerModule import AlphabetScannerMod
 AlphabetMod = AlphabetScannerMod()
 
 # import and instantiate each of the modules
+
+# Single level enc
 from CaesarEncryptModule import CaesarEncryptMod
 Modules.append (CaesarEncryptMod(AlphabetMod))
 
+# Single level dec
 from CaesarDecryptModule import CaesarDecryptMod
 Modules.append (CaesarDecryptMod (AlphabetMod))
+
+# Multi level enc
+from CaesarMultiEncryptModule import MultiEncryptMod
+Modules.append (MultiEncryptMod (AlphabetMod))
 
 # note, even if the modules are added automatically, always add the alphabet scanner manually and do it *last*
 Modules.append (AlphabetMod)
