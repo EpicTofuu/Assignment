@@ -3,7 +3,7 @@
 import os
 import os.path
 import pickle
-import tk 
+from Cipher.tk import findIndexInList, GetChiSquared
 
 # Returns: a list of tuples that contain both the decrypted message with the corresponding key
 def Caesar_Decrypt (message, alphabet):    
@@ -32,7 +32,7 @@ def Smart_Caesar_Decrypt (message, alphabet, lan = "English", giveTuple = True):
 		msg = Caesar_decrypt_Key (message, alphabet, key)
 
 		# Get the chi index for the decrypted string
-		chiIndex = tk.GetChiSquared (msg, lan)
+		chiIndex = GetChiSquared (msg, lan)
 		
 		v = (msg, chiIndex, key)
 		value.append (v)    # append the item to the value list
@@ -47,7 +47,7 @@ def Caesar_decrypt_Key (message, alphabet, key):
 	decrypted = "" 
 	for char in message:
 		if (alphabet.__contains__ (char)):
-			decrypted = decrypted + alphabet[tk.findIndexInList (alphabet, char) - key]
+			decrypted = decrypted + alphabet[findIndexInList (alphabet, char) - key]
 
 	return decrypted
 

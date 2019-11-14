@@ -22,6 +22,9 @@ AlphabetMod = AlphabetScannerMod()
 from CaesarEncryptModule import CaesarEncryptMod
 Modules.append (CaesarEncryptMod(AlphabetMod))
 
+from CaesarDecryptModule import CaesarDecryptMod
+Modules.append (CaesarDecryptMod (AlphabetMod))
+
 # note, even if the modules are added automatically, always add the alphabet scanner manually and do it *last*
 Modules.append (AlphabetMod)
 

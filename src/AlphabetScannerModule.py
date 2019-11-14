@@ -5,6 +5,7 @@ from tkProg import Pause
 from AlphabetContainer import AlphabetContainer
 
 class AlphabetScannerMod:
+    """Handles AlphabetContainer, contains all methods in regards to AlphabetContainer"""
     
     def __init__ (self):      
         self.ALPHABETFILENAME = "alphabets.pickle"
@@ -146,8 +147,3 @@ class AlphabetScannerMod:
     Actions = dict()
     Actions ["Import an alphabet"] = ImportAlphabets
     Actions ["Manage current alphabets"] = ManageAlphabets
-        
-
-
-    
-                    
