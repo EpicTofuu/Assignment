@@ -4,17 +4,17 @@ import random
 import enum
 
 try:
-    from Cipher.tk import findIndexInList
+    from Cipher.tk import findIndexInList, str_append
 except:
-    from tk import findIndexInList
+    from tk import findIndexInList, str_append
 
-def Caesar_Encrypt (userIn: str, alphabet = None) -> tuple:
+def CaesarEncrypt (userIn: str, alphabet = None) -> tuple:
     """encrypts the given string using a randomly generated key. Encrypts on Unicode by default"""
 
     k = random.randrange(0, 100)
-    return (Caesar_Encrypt_Key (userIn, k, alphabet), k)
+    return (CaesarEncryptKey (userIn, k, alphabet), k)
 
-def Caesar_Encrypt_Key (userIn: str, key: list, alphabet = None) -> str:  
+def CaesarEncryptKey (userIn: str, key: list, alphabet = None) -> str:  
     """encrypts the given string using the caesar cipher encryption algorithm"""
     InList = []     #list to store user input
 
@@ -31,11 +31,10 @@ def Caesar_Encrypt_Key (userIn: str, key: list, alphabet = None) -> str:
         for a in range (len (InList)):
             # find the index of the letter in the *input*
             inIndex = findIndexInList (alphabet, InList[a])
-
             # check if the character is supported, act accordingly
             if (inIndex != -1):
                 InList[a] = alphabet[(inIndex + key) % len(alphabet)]   
-    
+        
 
     # convert the list back into a string
     value = ""
@@ -52,5 +51,5 @@ p=[]
 for c in a:
     p.append (c)
 
-print (Caesar_Encrypt_Key ("DON IS SMART", 3, a))
+print (CaesarEncryptKey ("DON IS SMART", 3, a))
 '''

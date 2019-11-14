@@ -6,6 +6,7 @@ class MultiEncryptMod:
     def __init__(self, alphabet):
         self.Name = "Multi Level Encryption"
         self.AlphabetContainer = alphabet
+        
     def MultiEncryptTxt (self):
         # Take inputs
         tkProg.ClearScreen()

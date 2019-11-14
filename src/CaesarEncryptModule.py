@@ -1,7 +1,7 @@
 import tkProg
 import os
 from os.path import exists
-from Cipher.CaesarEncrypt import Caesar_Encrypt, Caesar_Encrypt_Key
+from Cipher.CaesarEncrypt import CaesarEncrypt, CaesarEncryptKey
 
 class CaesarEncryptMod:
 
@@ -28,11 +28,11 @@ class CaesarEncryptMod:
             msg = f.readline ()
 
             if (key == ""):
-                u = Caesar_Encrypt (msg, alphabet)
+                u = CaesarEncrypt (msg, alphabet)
                 value = u[0]
                 key = u[1]
             else:
-                value = Caesar_Encrypt_Key (msg, int(key), alphabet)
+                value = CaesarEncryptKey (msg, int(key), alphabet)
         else:
             print ("The file does not exist, please try again")
             return

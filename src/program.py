@@ -32,6 +32,10 @@ Modules.append (CaesarDecryptMod (AlphabetMod))
 from CaesarMultiEncryptModule import MultiEncryptMod
 Modules.append (MultiEncryptMod (AlphabetMod))
 
+# Multi level dec
+from CaesarMultiDecryptModule import MultiDecryptMod
+Modules.append (MultiDecryptMod (AlphabetMod))
+
 # note, even if the modules are added automatically, always add the alphabet scanner manually and do it *last*
 Modules.append (AlphabetMod)
 

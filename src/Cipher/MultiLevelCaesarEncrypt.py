@@ -3,7 +3,7 @@
 
 import random
 from Cipher.tk import EncryptDecryptCoord, Mode
-from Cipher.CaesarEncrypt import Caesar_Encrypt_Key
+from Cipher.CaesarEncrypt import CaesarEncryptKey
 
 def MultiEncrypt (message : str, alphabet = None, numOfShifts = 3):
     """multi encrypts a message using a pre generated list of shifts"""

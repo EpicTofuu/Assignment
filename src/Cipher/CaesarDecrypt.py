@@ -6,19 +6,19 @@ import pickle
 from Cipher.tk import findIndexInList, GetChiSquared
 
 # Returns: a list of tuples that contain both the decrypted message with the corresponding key
-def Caesar_Decrypt (message, alphabet):    
+def CaesarDecrypt (message, alphabet):    
 	"""Decrypts the given string using the caesar cipher algorithm"""
 	value = []          # list of all possible decryptions
 
 	for key in range (len(alphabet)):
-		decrypted = Caesar_decrypt_Key (message, alphabet, key)
+		decrypted = CaesarDecryptKey (message, alphabet, key)
 
 		addable = (decrypted, key)
 		value.append (addable)
 
 	return value 
 
-def Smart_Caesar_Decrypt (message, alphabet, lan = "English", giveTuple = True):
+def SmartCaesarDecrypt (message, alphabet, lan = "English", yieldSize = None):
 	"""
 	uses the chi squared algorithm to sort keys based on the probability of them returning a word in a given language.
 	Language distribution packs can be added to the LanguageCharDistributions folder in the library
@@ -29,7 +29,7 @@ def Smart_Caesar_Decrypt (message, alphabet, lan = "English", giveTuple = True):
 	
 	# iterate over all keys
 	for key in range (len (alphabet)):   
-		msg = Caesar_decrypt_Key (message, alphabet, key)
+		msg = CaesarDecryptKey (message, alphabet, key)
 
 		# Get the chi index for the decrypted string
 		chiIndex = GetChiSquared (msg, lan)
@@ -39,10 +39,12 @@ def Smart_Caesar_Decrypt (message, alphabet, lan = "English", giveTuple = True):
 
 	value.sort (key = lambda t: t[1]) # sort to smallest chi index
 
-	# return the value as required
-	return value if giveTuple else value[0]
+	yS = 0 if (yieldSize is None) else yieldSize + 1
 
-def Caesar_decrypt_Key (message, alphabet, key):
+	# return the value as required
+	return value [:yS] 
+
+def CaesarDecryptKey (message, alphabet, key):
 	"""decrypts a string using a given key"""
 	decrypted = "" 
 	for char in message:
@@ -59,7 +61,7 @@ p=[]
 for c in a:
 	p.append (c)
 
-o = Smart_Caesar_Decrypt ("GRQCLVCVPDUW", p)
+o = SmartCaesarDecrypt ("GRQCLVCVPDUW", p)
 
 print (o)
 

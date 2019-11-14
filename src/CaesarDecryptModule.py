@@ -1,6 +1,7 @@
 import os
 import tkProg
-from Cipher.CaesarDecrypt import Caesar_Decrypt, Caesar_decrypt_Key, Smart_Caesar_Decrypt
+import datetime
+from Cipher.CaesarDecrypt import CaesarDecrypt, CaesarDecryptKey, SmartCaesarDecrypt
 from os.path import exists
 
 class CaesarDecryptMod:
@@ -38,10 +39,10 @@ class CaesarDecryptMod:
         value = "" 
 
         if (in1 == "1"):                # brute force
-            value = Caesar_Decrypt (msgStr, alphabet)
+            value = CaesarDecrypt (msgStr, alphabet)
         elif (in1 == "2"):              # decrypt with known key
             workingKey = input ("what key should be used: ")
-            value = Caesar_decrypt_Key (msgStr, alphabet, int(workingKey)) + " - Encrypted using key: " + workingKey
+            value = CaesarDecryptKey (msgStr, alphabet, int(workingKey)) + " - Encrypted using key: " + workingKey
         else:                           # chi squared
             language = input ("which language pack should be chosen, leave blank for English ")
             # TODO maybe have a list of all languages
@@ -50,10 +51,23 @@ class CaesarDecryptMod:
 
             topX = input ("How many top results should be returned, leave as 1 for only the most likely result ")
 
-            value = Smart_Caesar_Decrypt (msgStr, alphabet, language)[int(topX) - 1]             
+            value = SmartCaesarDecrypt (msgStr, alphabet, language, int(topX) - 1)             
+
+        # write file
+        print ("writing...")
+        # output the file
+        T = ""
+        if (outFileName == ""):
+            T = "Single layer encryption at " + str(datetime.datetime.now())
+        else:
+            T = outFileName
+        filepath = os.path.join (outPath, T) + ".txt"
+        f = open (filepath, "w")
+        for i in value:
+            f.write (str(i[0]) + " with key " + str(i[1]) + "\n")
+        f.close()
 
         print (value)
-        input()
         return
 
     # add actions to dictionary
