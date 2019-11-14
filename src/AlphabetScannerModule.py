@@ -84,8 +84,8 @@ class AlphabetScannerMod:
             print ("not a valid import path")
             return
 
-        n : string  # name of alphabet
-        s : string  # store the string that contains the alphabet
+        n : str  # name of alphabet
+        s : str  # store the string that contains the alphabet
 
         f = open (impPath)
         
@@ -93,7 +93,7 @@ class AlphabetScannerMod:
         s = None
 
         for _ in f:
-            wL = f.read()
+            wL = f.readline()
             if (wL[0] == "#"):      # hash indicates the name of the alphabet
                 n = wL.strip()        
             elif (wL[0] == "$"):    # $ indicates the actual alphabet

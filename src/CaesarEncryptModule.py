@@ -1,5 +1,6 @@
 import tkProg
 import os
+import random
 from os.path import exists
 from Cipher.CaesarEncrypt import CaesarEncrypt, CaesarEncryptKey
 
@@ -25,14 +26,19 @@ class CaesarEncryptMod:
         # read the file and encrypt
         if (exists (path)):     # verify that the file exists
             f = open (path)
-            msg = f.readline ()
+            msgs = f.readlines ()
+
+            v = []
 
             if (key == ""):
-                u = CaesarEncrypt (msg, alphabet)
-                value = u[0]
-                key = u[1]
-            else:
-                value = CaesarEncryptKey (msg, int(key), alphabet)
+                key = random.randrange (len (alphabet))
+            
+            p = 0
+            for msg in msgs:
+                v.append (CaesarEncryptKey (msg, int(key), alphabet))
+                p += 1
+                print (str(round ((p / len(msgs)) * 100, 2)) + "%")
+                tkProg.ClearScreen()
         else:
             print ("The file does not exist, please try again")
             return
@@ -45,7 +51,8 @@ class CaesarEncryptMod:
             T = outFileName
         filepath = os.path.join (outPath, T) + ".txt"
         f = open (filepath, "w")
-        f.writelines (value)
+        for l in v:
+            f.writelines (l)
         f.close()
 
         # letting the user know

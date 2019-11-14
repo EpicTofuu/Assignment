@@ -2,10 +2,15 @@
 
 # program tk
 
+import os
 from os import system
 
 def ClearScreen():
-    system ("clear")
+    """Clear all elements on screen"""
+    if (os.name == "nt"):   
+        system ("cls")
+    else:
+        system ("clear")
 
 def Pause ():
     input("press enter to continue...")

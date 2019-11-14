@@ -29,12 +29,9 @@ def CaesarEncryptKey (userIn: str, key: list, alphabet = None) -> str:
             InList[a]= chr((inIndex + key))      
     else:   # Otherwise, just use the given alphabet
         for a in range (len (InList)):
-            # find the index of the letter in the *input*
-            inIndex = findIndexInList (alphabet, InList[a])
-            # check if the character is supported, act accordingly
-            if (inIndex != -1):
+            inIndex = findIndexInList (alphabet, InList[a])     # find the index of the letter in the *input*
+            if (inIndex != -1):                                 # check if the character is supported, act accordingly
                 InList[a] = alphabet[(inIndex + key) % len(alphabet)]   
-        
 
     # convert the list back into a string
     value = ""

@@ -5,63 +5,41 @@ try:
 except:
     import tk
 
+def MultiDecrypt (message, alphabet, usables = 3, lan = "English", transformations = [], lowestchi = 9999, ogMessage = ""):    
+    msg = ""    
+    prev = (9999, (0, 0))     # (chi, key)
 
-# Usables: the number of possible encryptions, larger values imply longer waiting times
-def MultiDecrypt_Recursive (message, alphabet, iterations, usables = 1, lan = "English") -> list:
-    A = []
-
-    # Generate all possible *decryptions* under the 0th iteration
-    for I in range (len(message)):
-        for n in range (1, len(alphabet)):
-            msg = (tk.EncryptDecryptCoord(message, (I,n), alphabet, tk.Mode.DECRYPT))
+    for i in range (len(message)):
+        for k in range (1, len (alphabet)):
+            msg = tk.EncryptDecryptCoord(message, (i,k), alphabet, tk.Mode.DECRYPT)
             chi = tk.GetChiSquared (msg, lan)
-            A.append ((msg, [(I,n)], chi))
 
-    #return A    
-    A.sort (key = lambda t: t[2]) # sort to smallest chi index
-    L = round (usables)
-    A = A[:L]   
-    return _multiDecrypt_Recursive (iterations, message, alphabet, A, usables, lan)
+            if (round (chi, 3) < round (prev[0], 3)):
+                prev = (chi, (i,k))
 
-def _multiDecrypt_Recursive (it: int, message, alphabet: str, V, usables: int, lan) -> tuple:
+    # base case
+    if (prev[0] >= lowestchi):
+        v = ogMessage
+        for tr in transformations:
+            v = tk.EncryptDecryptCoord (v, tr, alphabet, tk.Mode.DECRYPT)
+            return (v, lowestchi, transformations)
 
-    B = []  # contains all *found* elements
+    if (len(transformations) == 0):  # only set lowest chi on the first run
+        lowestchi = prev[0] 
+        ogMessage = message
 
-    # for each element in A, generate a set of messages using all possible keys
-    for e in V:
-        for I in range (0, len(message)):
-            for n in range (1, len(alphabet)):  # 0 is the identity key, no need to test
-                h = []
-                h.extend (e[1])
-                h.append ((I,n))
-                
-                deString = tk.EncryptDecryptCoord (e[0], (I, n), alphabet, tk.Mode.DECRYPT)     # decrypted string
+    transformations.append (prev[1])
 
-                chi = tk.GetChiSquared (deString, lan)
-
-                B.append ((deString, h, chi))
-
-    # Just take the lowest chi squared  
-    B.sort (key = lambda t: t[2]) # sort to smallest chi index
-    V = B[:usables]         
-
-    # reduce iterations by 1
-    it -= 1
-
-    # shift the system
-    if (it > 0):
-        _multiDecrypt_Recursive (it, message, alphabet, V, usables, lan)   
+    return MultiDecrypt (tk.EncryptDecryptCoord (message, prev[1], alphabet, tk.Mode.DECRYPT), alphabet, usables, lan, transformations, prev[0], ogMessage)
+            
     
-    # return the value after n iterations
-    return V + _multiDecrypt_Recursive ()
-    # https://stackoverflow.com/questions/32514605/python-list-recursive-changes
-
 
 # testing do write it here
-a = "abcdefghijklmnopqrstuvwxyz "
+a = " abcdefghijklmnopqrstuvwxyz"
 p=[]
 for c in a:
     p.append (c)
+
 print ("starting...")
-print (MultiDecrypt_Recursive ("eqpbkugblyegavj b", p, 3, 2))
+print (MultiDecrypt ("dtyktckcxlbd", p))
 # original 231

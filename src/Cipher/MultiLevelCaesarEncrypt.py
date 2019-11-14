@@ -1,14 +1,14 @@
 # SECTION 3
-
-
 import random
-from Cipher.tk import EncryptDecryptCoord, Mode
-from Cipher.CaesarEncrypt import CaesarEncryptKey
+try:
+    from tk import EncryptDecryptCoord, Mode
+except:
+    from Cipher.tk import EncryptDecryptCoord, Mode
 
 def MultiEncrypt (message : str, alphabet = None, numOfShifts = 3):
     """multi encrypts a message using a pre generated list of shifts"""
     shifts = []
-    for i in range (numOfShifts + 1):
+    for _ in range (numOfShifts + 1):
         shifts.append ((random.randrange (len(message) - 1), (random.randrange(len(alphabet)))))
 
     return (MultiEncrypt_Key (message, shifts, alphabet), shifts)
