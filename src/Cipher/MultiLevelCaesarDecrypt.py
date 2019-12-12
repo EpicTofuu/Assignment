@@ -1,9 +1,5 @@
-# TODO optimise
-
-try:
-    import Cipher.tk  
-except:
-    import tk
+import Cipher.tk  
+from Cipher.tk import EncryptDecryptCoord, GetChiSquared, Mode
 
 def MultiDecrypt (message, alphabet, usables = 3, lan = "English", transformations = [], lowestchi = 9999, ogMessage = ""):    
     msg = ""    
@@ -11,8 +7,8 @@ def MultiDecrypt (message, alphabet, usables = 3, lan = "English", transformatio
 
     for i in range (len(message)):
         for k in range (1, len (alphabet)):
-            msg = tk.EncryptDecryptCoord(message, (i,k), alphabet, tk.Mode.DECRYPT)
-            chi = tk.GetChiSquared (msg, lan)
+            msg = EncryptDecryptCoord(message, (i,k), alphabet, Mode.DECRYPT)
+            chi = GetChiSquared (msg, lan)
 
             if (round (chi, 3) < round (prev[0], 3)):
                 prev = (chi, (i,k))
@@ -21,7 +17,7 @@ def MultiDecrypt (message, alphabet, usables = 3, lan = "English", transformatio
     if (prev[0] >= lowestchi):
         v = ogMessage
         for tr in transformations:
-            v = tk.EncryptDecryptCoord (v, tr, alphabet, tk.Mode.DECRYPT)
+            v = EncryptDecryptCoord (v, tr, alphabet, Mode.DECRYPT)
             return (v, lowestchi, transformations)
 
     if (len(transformations) == 0):  # only set lowest chi on the first run
@@ -30,10 +26,9 @@ def MultiDecrypt (message, alphabet, usables = 3, lan = "English", transformatio
 
     transformations.append (prev[1])
 
-    return MultiDecrypt (tk.EncryptDecryptCoord (message, prev[1], alphabet, tk.Mode.DECRYPT), alphabet, usables, lan, transformations, prev[0], ogMessage)
-            
-    
-
+    return MultiDecrypt (EncryptDecryptCoord (message, prev[1], alphabet, Mode.DECRYPT), alphabet, usables, lan, transformations, prev[0], ogMessage)
+             
+'''
 # testing do write it here
 a = " abcdefghijklmnopqrstuvwxyz"
 p=[]
@@ -43,3 +38,4 @@ for c in a:
 print ("starting...")
 print (MultiDecrypt ("dtyktckcxlbd", p))
 # original 231
+'''

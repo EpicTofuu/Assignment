@@ -117,7 +117,7 @@ class MultiEncryptMod:
         else:
             value = MultiEncrypt_Key (msg, shifts, alphabet)
 
-        # output the file
+        # write the file
         print ("writing the file...")
         T = ""
         if (outFileName == ""):

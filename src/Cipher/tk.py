@@ -28,7 +28,7 @@ def findIndexInList (L: list, item) -> int:
 # c: the character to append
 # i: the index to append at, the existing character at i will not be replaced but shifted
 def str_append (s: str, c: str, i: int) -> str:
-    """ appends a character to a string at an index. This method *returns a value*, it does not set the value automatically TODO"""
+    """ appends a character to a string at an index. This method *returns a value*, it does not set the value automatically"""
 
     L = list (s)        
     L.insert (i, c)

@@ -45,7 +45,6 @@ class CaesarDecryptMod:
             value = CaesarDecryptKey (msgStr, alphabet, int(workingKey)) + " - Encrypted using key: " + workingKey
         else:                           # chi squared
             language = input ("which language pack should be chosen, leave blank for English ")
-            # TODO maybe have a list of all languages
             if (language == ""):
                 language = "English"
 
