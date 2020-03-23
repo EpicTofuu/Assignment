@@ -1,9 +1,4 @@
-# Assignment
-time for v grade
-
-Bottom the class epic style
-
-Specific collection, draw it there
+Made for an assignment. did alright :v
 
 # Actual readme text
 =====================================================
