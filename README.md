@@ -21,5 +21,5 @@ The chi algorithm included in decryption is built entirely on external files mea
     赤
     2.1
 
-UTF-8 files are supported
+UTF-8 files are supported<br>
 3) Comments can be made by adding an equal sign to the start eg "= This is a comment"
