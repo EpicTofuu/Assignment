@@ -1,10 +1,8 @@
 Made for an assignment. did alright :v
 
 # Actual readme text
-=====================================================
 
-
-# Directories:
+## Directories:
 
 src: contains all python code, including both high level program code and low level library code. This is where section 5 can be found
 Cipher: contains only the lower level library code, this is where code for sections 1-4 can be found
